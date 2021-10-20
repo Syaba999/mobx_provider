@@ -19,10 +19,10 @@ class MobxStatelessObserver<T extends MobxBase>
   MobxStatelessObserver({
     ///the name of your widget , that's used for debuging purposes only
     ///it's the same as the name parameter in the [observer] widget
-    String name,
-    Key key,
-    @required this.store,
-    @required this.builder,
+    String? name,
+    Key? key,
+    required this.store,
+    required this.builder,
   }) : super(key: key, name: name);
   @override
   Widget build(BuildContext context) => builder(context, store);

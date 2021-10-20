@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 class MobxWidgetProvider<T extends MobxBase> extends StatelessObserverWidget {
   final Widget Function(BuildContext context, T store) builder;
   MobxWidgetProvider({
-    @required this.builder,
+    required this.builder,
   });
   @override
   Widget build(BuildContext context) => builder(context, context.select((T store) => store));

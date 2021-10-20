@@ -8,36 +8,36 @@ import 'package:provider/provider.dart';
 ///this widget just exposes your store.
 ///this widget is helpful when you want to get the store's functionality without updating the UI
 ///like (counter.increment), use this widget with [MobxWidgetProvider] which observes the state of the store
-class MobxStatefulProvider<T extends MobxBase> extends StatefulWidget {
-  final Widget Function(BuildContext context, T store) builder;
+class MobxStatefulProvider<T extends MobxBase?> extends StatefulWidget {
+  final Widget Function(BuildContext context, T store)? builder;
 
   ///this function is called in the initState , can be used to fetch data from the api
-  final void Function(T store) initFunction;
+  final void Function(T store)? initFunction;
 
-  const MobxStatefulProvider({Key key, this.builder, this.initFunction})
+  const MobxStatefulProvider({Key? key, this.builder, this.initFunction})
       : super(key: key);
   @override
   _MobxStatefulProviderState<T> createState() =>
       _MobxStatefulProviderState<T>();
 }
 
-class _MobxStatefulProviderState<T extends MobxBase>
-    extends State<MobxStatefulProvider<T>> {
-  T _store;
+class _MobxStatefulProviderState<T extends MobxBase?>
+    extends State<MobxStatefulProvider<T?>> {
+  T? _store;
   @override
   void initState() {
     super.initState();
     _store = context.read<T>();
-    if (widget.initFunction != null) widget.initFunction(_store);
+    if (widget.initFunction != null) widget.initFunction!(_store);
   }
 
   @override
   void dispose() {
-    _store.dispose();
+    _store!.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) =>
-      widget.builder(context, context.select((T store) => store));
+      widget.builder!(context, context.select((T store) => store));
 }
