@@ -29,13 +29,15 @@ class MobxStatefulObserver<T extends MobxBase?> extends StatefulObserverWidget {
 }
 
 class _MobxStatefulObserverState<T extends MobxBase?>
-    extends State<MobxStatefulObserver<T?>> {
+    extends State<MobxStatefulObserver<T>> {
   T? _store;
   @override
   void initState() {
     super.initState();
     _store = widget.store;
-    if (widget.initFunction != null) widget.initFunction!(_store);
+    if (widget.initFunction != null) {
+      widget.initFunction!(_store!);
+    }
   }
 
   @override
@@ -45,5 +47,5 @@ class _MobxStatefulObserverState<T extends MobxBase?>
   }
 
   @override
-  Widget build(BuildContext context) => widget.builder(context, _store);
+  Widget build(BuildContext context) => widget.builder(context, _store!);
 }
